@@ -1,0 +1,21 @@
+header{
+    min-height: 10vh;
+
+}
+main{
+    min-height: 75vh;
+
+}
+footer{
+    min-height: 15vh;
+}
+.c-item{
+    height: 300px;
+}
+.c-img{
+    height: auto;
+    object-fit: cover;
+}
+.navbar{
+    min-height: 20vh;
+}
