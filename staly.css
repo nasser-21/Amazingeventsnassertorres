@@ -23,6 +23,18 @@ footer{
     height: 50vh;
 
 }
+#contenedor{
+    height: 35rem;
+}
+.imgcards{
+    height: 40%;
+
+
+}
+.card{
+    margin: 1rem;
+    background-color: rgb(129, 20, 66) !important;
+}
 
 @media only screen and (max-width: 1000px){
     .imgamazing{
