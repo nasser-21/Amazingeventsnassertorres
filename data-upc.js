@@ -1,7 +1,7 @@
 const data = {
     currentDate: "2023-01-01",
     events: [
-      {
+      { 
         _id: "639c723b992482e5f2834beb",
         name: "Korean style",
         image: "https://i.postimg.cc/ZmD3Xf57/Korean-style.jpg",

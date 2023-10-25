@@ -13,7 +13,7 @@ card.innerHTML=`
   </div>
   <div class="d-flex justify-content-between p-4">
     <h6> Price$ ${cards.price}</h6>
-    <a class="btn btn-secondary " role="button" href="details.html" aria-disabled="true">Details</a>
+    <a class="btn btn-secondary " role="button" href="details.html?_id=${cards._id}" aria-disabled="true">Details</a>
    </div>` 
 contenedor.appendChild(card)
 
