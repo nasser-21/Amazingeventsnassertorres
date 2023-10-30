@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const eventNameInput = document.getElementById("eventNameInput");
   const searchButton = document.getElementById("searchButton");
 
-  // (El resto de tu código)
+ 
 
 
-  // Obtener todas las categorías únicas de los eventos
+  
   const uniqueCategories = Array.from(new Set(data.events.map(event => event.category)));
 
-  // Crear checkboxes para cada categoría
+ 
   uniqueCategories.forEach(category => {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -66,6 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
   searchButton.addEventListener("click", filtrarEventos);
   document.querySelectorAll('.filter-checkbox').forEach(checkbox => checkbox.addEventListener("change", filtrarEventos));
 
-  // Mostrar todos los eventos al cargar la página
+ 
   mostrarEventos(data.events);
 });
