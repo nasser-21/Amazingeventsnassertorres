@@ -1,18 +1,30 @@
-const  events=data.events
+import data from './modeles/data.js';
 
-const filter = document.getElementById("filter");
-
-filter.innerHTML=`
-<label><input type="checkbox" id="filterFood Fair"> food</label>
-<label><input type="checkbox" id="filterMuseum"> museum</label>
-<label><input type="checkbox" id="filterCostume Party"> costume party</label>
-<label><input type="checkbox" id="filterMusic Concert"> Concierto de Música</label>
-<label><input type="checkbox" id="filterRace"> Carrera</label>
-<label><input type="checkbox" id="filterBook Exchange"> Intercambio de Libros</label>
-<label><input type="checkbox" id="filterCinema"> Cine</label>`;
-
+document.addEventListener("DOMContentLoaded", function () {
   const eventosContainer = document.getElementById("eventosContainer");
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const checkboxContainer = document.getElementById("checkboxContainer");
+  const eventNameInput = document.getElementById("eventNameInput");
+  const searchButton = document.getElementById("searchButton");
+
+  // (El resto de tu código)
+
+
+  // Obtener todas las categorías únicas de los eventos
+  const uniqueCategories = Array.from(new Set(data.events.map(event => event.category)));
+
+  // Crear checkboxes para cada categoría
+  uniqueCategories.forEach(category => {
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = `filter${category}`;
+    checkbox.className = "filter-checkbox";
+    checkboxContainer.appendChild(checkbox);
+
+    const label = document.createElement("label");
+    label.htmlFor = `filter${category}`;
+    label.innerText = category;
+    checkboxContainer.appendChild(label);
+  });
 
   function mostrarEventos(eventos) {
     eventosContainer.innerHTML = "";
@@ -22,9 +34,8 @@ filter.innerHTML=`
       card.className = "card";
 
       card.innerHTML = `
-         <img src="${evento.image}" alt="${evento.name}">
-        <h4>${evento.name}</h4>
-        <p>Categoría: ${evento.category}</p>
+        <img src="${evento.image}" alt="${evento.name}">
+        <h2>${evento.name}</h2>
         <p>Descripción: ${evento.description}</p>
         <p>Precio: $${evento.price}</p>
         <a class="btn btn-secondary " role="button" href="details.html?_id=${evento._id}" aria-disabled="true">Details</a>
@@ -36,23 +47,25 @@ filter.innerHTML=`
   }
 
   function filtrarEventos() {
-    const categoriasSeleccionadas = [...checkboxes]
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.id.replace("filter", ""));
+    const categoriasSeleccionadas = [...document.querySelectorAll('.filter-checkbox')]
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.id.replace("filter", ""));
 
-    if (categoriasSeleccionadas.length === 0) {
-      mostrarEventos(data.events);
-    } else {
-      const eventosFiltrados = data.events.filter((evento) =>
-        categoriasSeleccionadas.includes(evento.category)
-      );
-      mostrarEventos(eventosFiltrados);
-    }
+    const nombreBuscado = eventNameInput.value.toLowerCase().trim();
+
+    const eventosFiltrados = data.events.filter((evento) => {
+      const categoriaCoincide = categoriasSeleccionadas.length === 0 || categoriasSeleccionadas.includes(evento.category);
+      const nombreCoincide = evento.name.toLowerCase().includes(nombreBuscado);
+      return categoriaCoincide && nombreCoincide;
+    });
+
+    mostrarEventos(eventosFiltrados);
   }
 
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", filtrarEventos);
-  });
+  eventNameInput.addEventListener("input", filtrarEventos);
+  searchButton.addEventListener("click", filtrarEventos);
+  document.querySelectorAll('.filter-checkbox').forEach(checkbox => checkbox.addEventListener("change", filtrarEventos));
 
+  // Mostrar todos los eventos al cargar la página
   mostrarEventos(data.events);
-
+});

@@ -4,6 +4,7 @@ const _id = urlparams.get("_id");
 const events = data.events;
 
 let eventsEncontrados = events.find((event) => event._id == _id);
+
 console.log(eventsEncontrados);
 
 const contenedor = document.getElementById("contenedor");
