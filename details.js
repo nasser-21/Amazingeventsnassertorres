@@ -1,4 +1,4 @@
-import data from './modeles/data.js';
+import data from './modules/data.js';
 console.log(data);
 const urlparams = new URLSearchParams(window.location.search);
 const _id = urlparams.get("_id");
