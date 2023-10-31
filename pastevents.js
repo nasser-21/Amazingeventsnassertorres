@@ -1,5 +1,6 @@
 import data from './modeles/data.js';
 
+
 const eventsIn2022 = data.events.filter(event => !event.date.startsWith("2023"));
 const eventsToShow = eventsIn2022.slice(0, 7);
 
@@ -14,13 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
   const uniqueCategories = Array.from(new Set(eventsToShow.map(event => event.category)));
-
+  
  
   uniqueCategories.forEach(category => {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.id = `filter${category}`;
-    checkbox.className = "filter-checkbox";
+    checkbox.className = "filter-checkbox", "";
     checkboxContainer.appendChild(checkbox);
 
     const label = document.createElement("label");

@@ -6,6 +6,7 @@ const eventsIn2023 = data.events.filter(event => event.date.startsWith("2023"));
 console.log(eventsIn2023);
 
 
+
 const eventsToShow = eventsIn2023.slice(0, 7);
 
 
