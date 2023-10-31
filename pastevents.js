@@ -1,5 +1,8 @@
 import data from './modeles/data.js';
 
+const eventsIn2022 = data.events.filter(event => !event.date.startsWith("2023"));
+const eventsToShow = eventsIn2022.slice(0, 7);
+
 document.addEventListener("DOMContentLoaded", function () {
   const eventosContainer = document.getElementById("eventosContainer");
   const checkboxContainer = document.getElementById("checkboxContainer");
@@ -10,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   
-  const uniqueCategories = Array.from(new Set(data.events.map(event => event.category)));
+  const uniqueCategories = Array.from(new Set(eventsToShow.map(event => event.category)));
 
  
   uniqueCategories.forEach(category => {
@@ -53,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const nombreBuscado = eventNameInput.value.toLowerCase().trim();
 
-    const eventosFiltrados = data.events.filter((evento) => {
+    const eventosFiltrados = eventsToShow.filter((evento) => {
       const categoriaCoincide = categoriasSeleccionadas.length === 0 || categoriasSeleccionadas.includes(evento.category);
       const nombreCoincide = evento.name.toLowerCase().includes(nombreBuscado);
       return categoriaCoincide && nombreCoincide;
@@ -67,5 +70,5 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.filter-checkbox').forEach(checkbox => checkbox.addEventListener("change", filtrarEventos));
 
  
-  mostrarEventos(data.events);
+  mostrarEventos(eventsToShow);
 });

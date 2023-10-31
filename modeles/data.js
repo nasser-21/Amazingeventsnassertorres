@@ -199,3 +199,5 @@ export default data;
 
 
 
+
+const eventsIn2023 = data.events.filter(event => event.date.startsWith("2023"));
